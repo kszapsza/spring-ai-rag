@@ -18,9 +18,13 @@ public class OpenAiChatProvider implements ChatProvider {
     private static final Logger logger = LoggerFactory.getLogger(ChatProvider.class);
 
     private final OpenAiChatModel chatModel;
+    private final ChatSystemMessageProvider chatSystemMessageProvider;
 
-    public OpenAiChatProvider(OpenAiChatModel chatModel) {
+    public OpenAiChatProvider(
+            OpenAiChatModel chatModel,
+            ChatSystemMessageProvider chatSystemMessageProvider) {
         this.chatModel = chatModel;
+        this.chatSystemMessageProvider = chatSystemMessageProvider;
     }
 
     @Override
@@ -41,8 +45,9 @@ public class OpenAiChatProvider implements ChatProvider {
     }
 
     private Message callChatModel(String textContent) {
+        var systemMessage = chatSystemMessageProvider.systemMessage();
         var userMessage = new UserMessage(textContent);
-        var prompt = new Prompt(userMessage);
+        var prompt = new Prompt(systemMessage, userMessage);
 
         return chatModel.call(prompt)
                 .getResult()
