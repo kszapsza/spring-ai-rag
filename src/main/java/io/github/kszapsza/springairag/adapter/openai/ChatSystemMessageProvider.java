@@ -1,7 +1,5 @@
 package io.github.kszapsza.springairag.adapter.openai;
 
-import java.nio.file.Files;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.messages.SystemMessage;
@@ -26,12 +24,11 @@ public class ChatSystemMessageProvider {
     }
 
     private static String loadSystemMessage() {
-        try {
-            var path = new ClassPathResource(SYSTEM_MESSAGE_PATH).getFile().toPath();
-            return Files.readString(path);
+        try (var inputStream = new ClassPathResource(SYSTEM_MESSAGE_PATH).getInputStream()) {
+            return new String(inputStream.readAllBytes());
         } catch (Exception ex) {
             throw new IllegalStateException(
-                    String.format("Failed to load chatbot system message. Path: {}", SYSTEM_MESSAGE_PATH), ex);
+                    String.format("Failed to load chatbot system message. Path: %s", SYSTEM_MESSAGE_PATH), ex);
         }
     }
 }
