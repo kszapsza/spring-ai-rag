@@ -1,0 +1,10 @@
+spring:
+  ai:
+    openai:
+      chat:
+        options:
+          model: gpt-4o-mini
+  application:
+    name: spring-ai-rag
+  profiles:
+    default: local
