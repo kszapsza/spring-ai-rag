@@ -1,7 +1,9 @@
 plugins {
     java
+    alias(libs.plugins.integration.test)
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.test.logger)
 }
 
 group = "io.github.kszapsza"
@@ -31,6 +33,8 @@ dependencies {
     testImplementation(libs.spring.boot.starter.test)
 
     testRuntimeOnly(libs.junit.platform.launcher)
+
+    integrationImplementation(libs.bundles.testcontainers)
 }
 
 tasks.withType<Test> {

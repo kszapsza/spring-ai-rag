@@ -6,6 +6,8 @@ spring:
           model: gpt-4o-mini
   application:
     name: spring-ai-rag
+  datasource:
+    driver-class-name: org.postgresql.Driver
   profiles:
     default: local
 

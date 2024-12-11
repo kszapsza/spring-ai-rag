@@ -1,9 +1,12 @@
 [versions]
+integration-test = "2.2.2"
 junit-platform-launcher = "1.10.0"
 postgresql = "42.6.0"
 spring-ai = "1.0.0-M4"
 spring-boot = "3.4.0"
 spring-dependency-management = "1.1.6"
+test-logger = "4.0.0"
+testcontainers = "1.20.4"
 
 [libraries]
 junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junit-platform-launcher" }
@@ -14,7 +17,19 @@ spring-ai-pgvector-store-spring-boot-starter = { group = "org.springframework.ai
 spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
 spring-boot-starter-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
 spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
+testcontainers = { group = "org.testcontainers", name = "testcontainers", version.ref = "testcontainers" }
+testcontainers-junit-jupiter = { group = "org.testcontainers", name = "junit-jupiter", version.ref = "testcontainers" }
+testcontainers-postgresql = { group = "org.testcontainers", name = "postgresql", version.ref = "testcontainers" }
+
+[bundles]
+testcontainers = [
+    "testcontainers",
+    "testcontainers-junit-jupiter",
+    "testcontainers-postgresql",
+]
 
 [plugins]
+integration-test = { id = "com.coditory.integration-test", version.ref = "integration-test" }
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+test-logger = { id = "com.adarshr.test-logger", version.ref = "test-logger" }
