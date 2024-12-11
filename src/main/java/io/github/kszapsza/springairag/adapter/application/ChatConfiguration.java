@@ -1,4 +1,4 @@
-package io.github.kszapsza.springairag.adapter.config;
+package io.github.kszapsza.springairag.adapter.application;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

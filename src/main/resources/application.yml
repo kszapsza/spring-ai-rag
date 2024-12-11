@@ -8,3 +8,8 @@ spring:
     name: spring-ai-rag
   profiles:
     default: local
+
+chat:
+  system-message:
+    placeholders:
+      companyName: DJF Development

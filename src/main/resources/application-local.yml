@@ -4,3 +4,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/spring_ai_rag_vector_store
     username: root
     password: admin
+
+logging:
+  level:
+    org.springframework.ai.chat.client.advisor: DEBUG

@@ -1,7 +1,5 @@
 package io.github.kszapsza.springairag.adapter.rest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +14,6 @@ import io.github.kszapsza.springairag.domain.chat.ChatService;
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
-    private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
-
     private final ChatService chatService;
 
     public ChatController(ChatService chatService) {
@@ -26,7 +22,6 @@ public class ChatController {
 
     @PostMapping
     public ResponseEntity<ChatResponseDto> chat(@RequestBody ChatRequestDto request) {
-        logger.info("Received chat request: {}", request.message());
         var chatResponse = chatService.chat(request.toDomain());
 
         return switch (chatResponse) {
