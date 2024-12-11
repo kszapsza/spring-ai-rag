@@ -10,17 +10,17 @@ import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import io.github.kszapsza.springairag.adapter.application.SystemMessageProperties;
+import io.github.kszapsza.springairag.adapter.llm.prompt.SystemPromptTemplateProvider;
 import io.github.kszapsza.springairag.domain.chat.ChatProvider;
 import io.github.kszapsza.springairag.domain.chat.ChatRequest;
 import io.github.kszapsza.springairag.domain.chat.ChatResponse;
 
 @Component
 public class OpenAiChatProvider implements ChatProvider {
+
     private static final Logger logger = LoggerFactory.getLogger(OpenAiChatProvider.class);
 
     private final OpenAiChatModel chatModel;
@@ -32,18 +32,11 @@ public class OpenAiChatProvider implements ChatProvider {
             OpenAiChatModel chatModel,
             VectorStore vectorStore,
             SystemMessageProperties systemMessageProperties,
-            @Value("classpath:/chat/system-message.txt") Resource systemPromptResource) {
+            SystemPromptTemplateProvider systemPromptTemplateProvider) {
         this.chatModel = chatModel;
         this.vectorStore = vectorStore;
         this.systemMessageProperties = systemMessageProperties;
-        this.systemPromptTemplate = loadSystemPromptTemplate(systemPromptResource);
-    }
-
-    private SystemPromptTemplate loadSystemPromptTemplate(Resource systemPromptResource) {
-        if (systemPromptResource == null || !systemPromptResource.exists() || !systemPromptResource.isReadable()) {
-            throw new IllegalStateException("System prompt resource is missing or not readable");
-        }
-        return new SystemPromptTemplate(systemPromptResource);
+        this.systemPromptTemplate = systemPromptTemplateProvider.getSystemPromptTemplate();
     }
 
     @Override
