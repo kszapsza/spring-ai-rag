@@ -1,4 +1,8 @@
 spring:
+  ai:
+    vectorstore:
+      pgvector:
+        remove-existing-vector-store-table: true
   datasource:
     url: jdbc:postgresql://localhost:5432/spring_ai_rag_vector_store
     username: root

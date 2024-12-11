@@ -4,6 +4,15 @@ spring:
       chat:
         options:
           model: gpt-4o-mini
+      embedding:
+        options:
+          model: text-embedding-ada-002
+    vectorstore:
+      pgvector:
+        dimensions: 1536
+        distance-type: COSINE_DISTANCE
+        index-type: HNSW
+        initialize-schema: true
   application:
     name: spring-ai-rag
   datasource:

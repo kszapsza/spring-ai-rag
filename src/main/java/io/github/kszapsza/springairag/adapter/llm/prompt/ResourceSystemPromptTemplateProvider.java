@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class ResourceSystemPromptTemplateProvider implements SystemPromptTemplateProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(ResourceSystemPromptTemplateProvider.class);
+
     private final SystemPromptTemplate systemPromptTemplate;
 
     public ResourceSystemPromptTemplateProvider(

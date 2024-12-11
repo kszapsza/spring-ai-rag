@@ -3,10 +3,13 @@ package io.github.kszapsza.springairag.adapter.llm.openai;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 import org.springframework.ai.openai.OpenAiChatModel;
+import org.springframework.ai.vectorstore.SearchRequest;
+import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -21,14 +24,17 @@ public class OpenAiChatProvider implements ChatProvider {
     private static final Logger logger = LoggerFactory.getLogger(OpenAiChatProvider.class);
 
     private final OpenAiChatModel chatModel;
+    private final VectorStore vectorStore;
     private final SystemMessageProperties systemMessageProperties;
     private final SystemPromptTemplate systemPromptTemplate;
 
     public OpenAiChatProvider(
             OpenAiChatModel chatModel,
+            VectorStore vectorStore,
             SystemMessageProperties systemMessageProperties,
             @Value("classpath:/chat/system-message.txt") Resource systemPromptResource) {
         this.chatModel = chatModel;
+        this.vectorStore = vectorStore;
         this.systemMessageProperties = systemMessageProperties;
         this.systemPromptTemplate = loadSystemPromptTemplate(systemPromptResource);
     }
@@ -57,7 +63,9 @@ public class OpenAiChatProvider implements ChatProvider {
     private Message callChatModel(String userMessageContent) {
         return ChatClient.create(chatModel)
                 .prompt()
-                .advisors(new SimpleLoggerAdvisor())
+                .advisors(
+                        new SimpleLoggerAdvisor(),
+                        new QuestionAnswerAdvisor(vectorStore, SearchRequest.defaults()))
                 .system(systemPromptTemplate.createMessage(systemMessageProperties.placeholders()).getContent())
                 .user(userMessageContent)
                 .call()
