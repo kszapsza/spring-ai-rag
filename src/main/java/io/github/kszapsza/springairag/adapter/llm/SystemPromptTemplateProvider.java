@@ -1,4 +1,4 @@
-package io.github.kszapsza.springairag.adapter.llm.prompt;
+package io.github.kszapsza.springairag.adapter.llm;
 
 import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 

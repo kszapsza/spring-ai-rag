@@ -13,7 +13,7 @@ import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Component;
 
 import io.github.kszapsza.springairag.adapter.application.SystemMessageProperties;
-import io.github.kszapsza.springairag.adapter.llm.prompt.SystemPromptTemplateProvider;
+import io.github.kszapsza.springairag.adapter.llm.SystemPromptTemplateProvider;
 import io.github.kszapsza.springairag.domain.chat.ChatProvider;
 import io.github.kszapsza.springairag.domain.chat.ChatRequest;
 import io.github.kszapsza.springairag.domain.chat.ChatResponse;

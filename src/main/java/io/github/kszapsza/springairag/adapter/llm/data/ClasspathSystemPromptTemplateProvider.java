@@ -1,4 +1,4 @@
-package io.github.kszapsza.springairag.adapter.llm.prompt;
+package io.github.kszapsza.springairag.adapter.llm.data;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,6 +6,8 @@ import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+
+import io.github.kszapsza.springairag.adapter.llm.SystemPromptTemplateProvider;
 
 @Component
 public class ClasspathSystemPromptTemplateProvider implements SystemPromptTemplateProvider {

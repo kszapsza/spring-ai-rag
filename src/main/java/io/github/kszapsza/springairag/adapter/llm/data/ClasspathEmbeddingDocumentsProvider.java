@@ -10,14 +10,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-@Component
-public class ClasspathEmbeddingDataProvider implements EmbeddingDataProvider {
+import io.github.kszapsza.springairag.adapter.llm.EmbeddingDocumentsProvider;
 
-    private static final Logger logger = LoggerFactory.getLogger(ClasspathEmbeddingDataProvider.class);
+@Component
+public class ClasspathEmbeddingDocumentsProvider implements EmbeddingDocumentsProvider {
+
+    private static final Logger logger = LoggerFactory.getLogger(ClasspathEmbeddingDocumentsProvider.class);
 
     private final List<Document> data;
 
-    public ClasspathEmbeddingDataProvider(
+    public ClasspathEmbeddingDocumentsProvider(
             @Value("classpath:/embedding/faq-data.json") Resource exampleDocumentResource) {
         if (exampleDocumentResource == null || !exampleDocumentResource.exists()
                 || !exampleDocumentResource.isReadable()) {
