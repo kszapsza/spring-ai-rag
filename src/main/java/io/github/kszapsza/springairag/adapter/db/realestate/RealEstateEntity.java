@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "real_estate", indexes = {
         @Index(name = "idx_location", columnList = "location"),
+        @Index(name = "idx_country_code", columnList = "country_code"),
         @Index(name = "idx_price", columnList = "price"),
         @Index(name = "idx_bedrooms", columnList = "bedrooms"),
         @Index(name = "idx_is_active", columnList = "is_active")
@@ -29,6 +30,9 @@ public class RealEstateEntity {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @Column(nullable = false, length = 2)
+    private String countryCode;
 
     @Column(nullable = false, length = 255)
     private String location;
@@ -78,14 +82,15 @@ public class RealEstateEntity {
     public RealEstateEntity() {
     }
 
-    public RealEstateEntity(Long id, String title, String description, String location, String address,
-            Integer bedrooms, Integer bathrooms, BigDecimal price, String currency,
+    public RealEstateEntity(Long id, String title, String description, String countryCode, String location,
+            String address, Integer bedrooms, Integer bathrooms, BigDecimal price, String currency,
             BigDecimal size, Boolean hasBalcony, Boolean hasTerrace, Boolean hasGarden,
             Boolean energyEfficient, Integer greenSpaceDistance, Boolean isActive,
             LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.countryCode = countryCode;
         this.location = location;
         this.address = address;
         this.bedrooms = bedrooms;
@@ -125,6 +130,14 @@ public class RealEstateEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public String getLocation() {

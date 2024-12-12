@@ -27,6 +27,7 @@ public class RealEstateSearchFunction
         try {
             return new Response(
                     realEstateRepository.searchRealEstate(
+                            request.countryCode(),
                             request.location(),
                             request.minPrice(),
                             request.maxPrice(),
@@ -38,6 +39,7 @@ public class RealEstateSearchFunction
     }
 
     public record Request(
+            String countryCode,
             String location,
             BigDecimal minPrice,
             BigDecimal maxPrice,
