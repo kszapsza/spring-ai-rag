@@ -3,10 +3,9 @@ package io.github.kszapsza.springairag.adapter.llm.openai;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import io.github.kszapsza.springairag.adapter.llm.data.ResourceEmbeddingDataProvider;
+import io.github.kszapsza.springairag.adapter.llm.data.EmbeddingDataProvider;
 import io.github.kszapsza.springairag.domain.embedding.EmbeddingsFeeder;
 
 @Component
@@ -14,13 +13,12 @@ public class OpenAiEmbeddingsFeeder implements EmbeddingsFeeder {
 
     private static final Logger logger = LoggerFactory.getLogger(OpenAiEmbeddingsFeeder.class);
 
-    private final ResourceEmbeddingDataProvider dataProvider;
+    private final EmbeddingDataProvider dataProvider;
     private final VectorStore vectorStore;
 
     public OpenAiEmbeddingsFeeder(
-            JdbcTemplate jdbcTemplate,
             VectorStore vectorStore,
-            ResourceEmbeddingDataProvider dataProvider) {
+            EmbeddingDataProvider dataProvider) {
         this.vectorStore = vectorStore;
         this.dataProvider = dataProvider;
     }

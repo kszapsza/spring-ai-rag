@@ -11,13 +11,13 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ResourceEmbeddingDataProvider implements EmbeddingDataProvider {
+public class ClasspathEmbeddingDataProvider implements EmbeddingDataProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResourceEmbeddingDataProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClasspathEmbeddingDataProvider.class);
 
     private final List<Document> data;
 
-    public ResourceEmbeddingDataProvider(
+    public ClasspathEmbeddingDataProvider(
             @Value("classpath:/embedding/faq-data.json") Resource exampleDocumentResource) {
         if (exampleDocumentResource == null || !exampleDocumentResource.exists()
                 || !exampleDocumentResource.isReadable()) {

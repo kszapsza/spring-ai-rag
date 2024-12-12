@@ -1,4 +1,4 @@
-package io.github.kszapsza.springairag.adapter.llm.data;
+package io.github.kszapsza.springairag.adapter.application;
 
 import io.github.kszapsza.springairag.domain.embedding.EmbeddingsFeeder;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Profile("local")
-public class EmbeddingsStartupListener {
+public class ApplicationStartupListener {
 
     private final EmbeddingsFeeder embeddingsFeeder;
 
-    public EmbeddingsStartupListener(EmbeddingsFeeder embeddingsFeeder) {
+    public ApplicationStartupListener(EmbeddingsFeeder embeddingsFeeder) {
         this.embeddingsFeeder = embeddingsFeeder;
     }
 

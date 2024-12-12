@@ -8,13 +8,13 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ResourceSystemPromptTemplateProvider implements SystemPromptTemplateProvider {
+public class ClasspathSystemPromptTemplateProvider implements SystemPromptTemplateProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(ResourceSystemPromptTemplateProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClasspathSystemPromptTemplateProvider.class);
 
     private final SystemPromptTemplate systemPromptTemplate;
 
-    public ResourceSystemPromptTemplateProvider(
+    public ClasspathSystemPromptTemplateProvider(
             @Value("classpath:/chat/system-message.txt") Resource systemPromptResource) {
         if (systemPromptResource == null || !systemPromptResource.exists() || !systemPromptResource.isReadable()) {
             throw new IllegalStateException("System prompt resource is missing or not readable");
