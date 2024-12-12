@@ -1,4 +1,4 @@
-package io.github.kszapsza.springairag.adapter.llm.data;
+package io.github.kszapsza.springairag.adapter.llm.classpath;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

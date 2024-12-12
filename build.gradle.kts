@@ -23,12 +23,12 @@ repositories {
 dependencies {
     implementation(platform(libs.spring.ai.bom))
 
+    implementation(libs.postgresql)
     implementation(libs.spring.ai.openai.spring.boot.starter)
     implementation(libs.spring.ai.pgvector.store.spring.boot.starter)
+    implementation(libs.spring.boot.starter.data.jpa)
     implementation(libs.spring.boot.starter.validation)
     implementation(libs.spring.boot.starter.web)
-
-    runtimeOnly(libs.postgresql)
 
     testImplementation(libs.spring.boot.starter.test)
 

@@ -1,11 +1,11 @@
 services:
   postgres:
-    image: postgres:latest
-    container_name: spring-rag-vector-store
+    image: pgvector/pgvector:pg17
+    container_name: spring-ai-rag
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: spring_ai_rag_vector_store
+      POSTGRES_DB: spring_ai_rag
     ports:
       - "5432:5432"
     volumes:

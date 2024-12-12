@@ -4,6 +4,7 @@ spring:
       chat:
         options:
           model: gpt-4o-mini
+          temperature: 0.3
       embedding:
         options:
           model: text-embedding-ada-002
@@ -17,6 +18,15 @@ spring:
     name: spring-ai-rag
   datasource:
     driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    properties:
+      hibernate:
+        "[format_sql]": false
+        jdbc:
+          lob:
+            "[non_contextual_creation]": true
   profiles:
     default: local
 

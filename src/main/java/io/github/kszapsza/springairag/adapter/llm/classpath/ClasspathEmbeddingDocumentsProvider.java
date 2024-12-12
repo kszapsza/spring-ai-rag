@@ -1,4 +1,4 @@
-package io.github.kszapsza.springairag.adapter.llm.data;
+package io.github.kszapsza.springairag.adapter.llm.classpath;
 
 import java.util.List;
 

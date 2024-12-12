@@ -6,8 +6,10 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.messages.Message;
+import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 import org.springframework.ai.openai.OpenAiChatModel;
+import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Component;
@@ -56,6 +58,7 @@ public class OpenAiChatProvider implements ChatProvider {
     private Message callChatModel(String userMessageContent) {
         return ChatClient.create(chatModel)
                 .prompt()
+                .options(buildOptions())
                 .advisors(
                         new SimpleLoggerAdvisor(),
                         new QuestionAnswerAdvisor(vectorStore, SearchRequest.defaults()))
@@ -65,5 +68,11 @@ public class OpenAiChatProvider implements ChatProvider {
                 .chatResponse()
                 .getResult()
                 .getOutput();
+    }
+
+    private ChatOptions buildOptions() {
+        return OpenAiChatOptions.builder()
+                .withFunction("realEstateSearchFunction")
+                .build();
     }
 }
