@@ -1,4 +1,6 @@
 package io.github.kszapsza.springairag.domain.chat;
 
-public record ChatRequest(String message) {
+import io.github.kszapsza.springairag.domain.chat.memory.ConversationId;
+
+public record ChatRequest(ConversationId conversationId, String message) {
 }

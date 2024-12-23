@@ -31,6 +31,8 @@ spring:
     default: local
 
 app:
+  conversation:
+    max-last-n: 1000
   chat:
     embedding:
       document: "classpath:/embedding/faq-data.json"

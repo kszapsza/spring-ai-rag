@@ -3,9 +3,11 @@ package io.github.kszapsza.springairag.adapter.llm.openai;
 import java.util.List;
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.client.advisor.api.Advisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.openai.OpenAiChatModel;
@@ -34,10 +36,11 @@ class OpenAiChatConfiguration {
     }
 
     @Bean
-    List<Advisor> chatAdvisors(VectorStore vectorStore) {
+    List<Advisor> chatAdvisors(ChatMemory chatMemory, VectorStore vectorStore) {
         return List.of(
-                new SimpleLoggerAdvisor(),
-                new QuestionAnswerAdvisor(vectorStore, SearchRequest.defaults()));
+                new MessageChatMemoryAdvisor(chatMemory),
+                new QuestionAnswerAdvisor(vectorStore, SearchRequest.defaults()),
+                new SimpleLoggerAdvisor());
     }
 
     @Bean

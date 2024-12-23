@@ -9,26 +9,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.kszapsza.springairag.domain.chat.ChatProvider;
 import io.github.kszapsza.springairag.domain.chat.ChatRequest;
 import io.github.kszapsza.springairag.domain.chat.ChatResponse;
-import io.github.kszapsza.springairag.domain.chat.ChatService;
+import io.github.kszapsza.springairag.domain.chat.memory.ConversationId;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
+
     private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
 
-    private final ChatService chatService;
+    private final ChatProvider chatProvider;
 
-    public ChatController(ChatService chatService) {
-        this.chatService = chatService;
+    public ChatController(ChatProvider chatProvider) {
+        this.chatProvider = chatProvider;
     }
 
     @PostMapping
     public ResponseEntity<ChatResponseDto> chat(@Valid @RequestBody ChatRequestDto request) {
-        var chatResponse = chatService.chat(request.toDomain());
+        var chatResponse = chatProvider.chat(request.toDomain());
 
         return switch (chatResponse) {
             case ChatResponse.Success success -> {
@@ -48,9 +50,9 @@ public class ChatController {
     }
 }
 
-record ChatRequestDto(@NotBlank String message) {
+record ChatRequestDto(@NotBlank String conversationId, @NotBlank String message) {
     public ChatRequest toDomain() {
-        return new ChatRequest(message());
+        return new ChatRequest(new ConversationId(conversationId()), message());
     }
 }
 

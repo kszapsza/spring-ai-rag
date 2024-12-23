@@ -2,5 +2,6 @@ POST http://localhost:8080/api/chat HTTP/1.1
 Content-Type: application/json
 
 {
-    "message": "In how many neighborhoods does DJF operate in Warsaw?"
+    "conversationId": "1447eadc-6c64-481b-aee3-b90ab5c1ef2f",
+    "message": "Ich suche Immobilien in Berlin"
 }

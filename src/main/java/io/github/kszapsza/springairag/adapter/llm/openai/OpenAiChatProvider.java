@@ -1,5 +1,8 @@
 package io.github.kszapsza.springairag.adapter.llm.openai;
 
+import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
+import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_RETRIEVE_SIZE_KEY;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.messages.Message;
-import org.springframework.ai.chat.model.Generation;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.context.annotation.Configuration;
 
@@ -40,7 +42,8 @@ public class OpenAiChatProvider implements ChatProvider {
     @Override
     public ChatResponse chat(ChatRequest request) {
         try {
-            return callChatModel(request.message())
+            return callChatModel(request)
+                    .map((response) -> response.getResult())
                     .map((generation) -> generation.getOutput().getContent())
                     .map((content) -> (ChatResponse) new ChatResponse.Success(content))
                     .orElseGet(() -> {
@@ -53,15 +56,17 @@ public class OpenAiChatProvider implements ChatProvider {
         }
     }
 
-    private Optional<Generation> callChatModel(String userMessageContent) {
+    private Optional<org.springframework.ai.chat.model.ChatResponse> callChatModel(ChatRequest request) {
         return Optional.ofNullable(
                 chatClient.prompt()
                         .options(chatOptions)
                         .advisors(advisors)
                         .system(systemMessage.getContent())
-                        .user(userMessageContent)
+                        .user(request.message())
+                        .advisors((advisorSpec) -> advisorSpec
+                                .param(CHAT_MEMORY_CONVERSATION_ID_KEY, request.conversationId().raw())
+                                .param(CHAT_MEMORY_RETRIEVE_SIZE_KEY, 100))
                         .call()
-                        .chatResponse()
-                        .getResult());
+                        .chatResponse());
     }
 }
