@@ -1,13 +1,11 @@
 # spring-ai-rag
 
-A Retrieval-Augmented Generation (RAG) Spring Boot application built using Spring AI and integrated with the OpenAI API.
-
-It serves as a virtual real estate assistant capable of answering frequently asked questions (FAQs) based on company domain knowledge, searching real estate listings by filtering criteria such as location, price range, and number of bedrooms, and maintaining conversation history to provide context-aware follow-up responses.
+A Retrieval-Augmented Generation (RAG) Spring Boot application built using Spring AI and integrated with the OpenAI API. It serves as a virtual real estate assistant capable of answering frequently asked questions (FAQs) based on company domain knowledge, searching real estate listings by filtering criteria such as location, price range, and number of bedrooms, and maintaining conversation history to provide context-aware follow-up responses.
 
 ## Features
 
 - **Retrieval-Augmented Generation (RAG)**: Enriches AI-generated responses by dynamically retrieving context from structured data stored in PostgreSQL with pgvector for embeddings.
-- **Chat History Memory**: Maintains a conversation history to provide context-aware replies in multi-turn conversations. The application uses in-memory chat memory for the sake of simplicity—for production-ready systems, it should be changed to a persistent memory store (Spring AI currently only supports Apache Cassandra)
+- **Chat History Memory**: Maintains a conversation history to provide context-aware replies in multi-turn conversations. The application uses in-memory chat memory for the sake of simplicity—for production-ready systems, it should be changed to a persistent memory store (Spring AI currently supports only Apache Cassandra)
 - **OpenAI Integration**: Leverages the Spring AI library to connect with OpenAI GPT models for text generation and embedding creation.
 - **Function Calling Support**: Demonstrates OpenAI function calling to trigger SQL queries on a relational database and return structured responses.
 - **RESTful API Design**: Provides chat and conversation history retrieval endpoints, ready for frontend chatbot integration.
@@ -49,7 +47,7 @@ Generates a response based on user input.
 ```
 
 #### Response Body
-**200 OK**
+- **200 OK**
 
 ```json
 {
@@ -57,7 +55,6 @@ Generates a response based on user input.
 }
 ```
 
-**Error Codes:**
 - **400 Bad Request** – Invalid input or missing fields.
 - **503 Service Unavailable** – Chat service temporarily unavailable.
 
@@ -67,7 +64,7 @@ Generates a response based on user input.
 Retrieve recent chat messages.
 
 #### Response Body
-**200 OK**
+- **200 OK**
 
 ```json
 {
@@ -85,5 +82,5 @@ Retrieve recent chat messages.
 }
 ```
 
-- **400 Bad Request** – Invalid lastN parameter.
-- **404 Not Found** – Conversation ID does not exist.
+- **400 Bad Request** – Invalid `lastN` parameter.
+- **404 Not Found** – `conversationId` does not exist.
