@@ -10,6 +10,8 @@ import io.github.kszapsza.springairag.domain.chat.memory.ConversationId;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -32,7 +34,7 @@ public class ConversationController {
         this.maxLastN = maxLastN;
     }
 
-    @GetMapping("{conversationId}")
+    @GetMapping(path = "{conversationId}", produces = { APPLICATION_JSON_VALUE }, consumes = { APPLICATION_JSON_VALUE })
     public ResponseEntity<ConversationHistoryDto> getConversationHistory(
             @PathVariable(name = "conversationId") @Valid @NotBlank String conversationId,
             @RequestParam(name = "lastN", defaultValue = "10") int lastN) {
