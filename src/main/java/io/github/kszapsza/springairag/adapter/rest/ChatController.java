@@ -1,5 +1,7 @@
 package io.github.kszapsza.springairag.adapter.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,10 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import io.github.kszapsza.springairag.domain.chat.ChatRequest;
 import io.github.kszapsza.springairag.domain.chat.ChatResponse;
 import io.github.kszapsza.springairag.domain.chat.ChatService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/api/chat")
 public class ChatController {
+    private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
+
     private final ChatService chatService;
 
     public ChatController(ChatService chatService) {
@@ -21,20 +27,28 @@ public class ChatController {
     }
 
     @PostMapping
-    public ResponseEntity<ChatResponseDto> chat(@RequestBody ChatRequestDto request) {
+    public ResponseEntity<ChatResponseDto> chat(@Valid @RequestBody ChatRequestDto request) {
         var chatResponse = chatService.chat(request.toDomain());
 
         return switch (chatResponse) {
-            case ChatResponse.Success success ->
-                ResponseEntity.ok(ChatResponseDto.fromDomain(success));
-            case ChatResponse.Failure failure ->
-                ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+            case ChatResponse.Success success -> {
+                yield ResponseEntity.ok(ChatResponseDto.fromDomain(success));
+            }
+            case ChatResponse.Error.ClientError failure -> {
+                logger.warn("Client error occurred: {}", failure.errorMessage());
+                yield ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ChatResponseDto(failure.errorMessage()));
+            }
+            case ChatResponse.Error.ServerError failure -> {
+                logger.error("Server error occurred: {}", failure.errorMessage());
+                yield ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
                         .body(new ChatResponseDto("The chat is temporarily unavailable. Please try again later."));
+            }
         };
     }
 }
 
-record ChatRequestDto(String message) {
+record ChatRequestDto(@NotBlank String message) {
     public ChatRequest toDomain() {
         return new ChatRequest(message());
     }

@@ -30,7 +30,11 @@ spring:
   profiles:
     default: local
 
-chat:
-  system-message:
-    placeholders:
-      companyName: DJF Development
+app:
+  chat:
+    embedding:
+      document: "classpath:/embedding/faq-data.json"
+    system-prompt:
+      placeholders:
+        companyName: DJF Development
+      resource: "classpath:/chat/system-message.txt"

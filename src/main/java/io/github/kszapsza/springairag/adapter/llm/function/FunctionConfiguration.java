@@ -10,7 +10,7 @@ import io.github.kszapsza.springairag.adapter.db.realestate.RealEstateRepository
 import io.github.kszapsza.springairag.adapter.llm.function.realestate.RealEstateSearchFunction;
 
 @Configuration
-public class FunctionConfiguration {
+class FunctionConfiguration {
 
     @Bean
     @Description("Searches real estate listings by location, price range, bedrooms, and active status")
