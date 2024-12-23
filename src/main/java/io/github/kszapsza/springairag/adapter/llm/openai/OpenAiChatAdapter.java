@@ -12,23 +12,23 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.api.Advisor;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.prompt.ChatOptions;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-import io.github.kszapsza.springairag.domain.chat.ChatProvider;
+import io.github.kszapsza.springairag.domain.chat.ChatPort;
 import io.github.kszapsza.springairag.domain.chat.ChatRequest;
 import io.github.kszapsza.springairag.domain.chat.ChatResponse;
 
-@Configuration
-public class OpenAiChatProvider implements ChatProvider {
+@Component
+public class OpenAiChatAdapter implements ChatPort {
 
-    private static final Logger logger = LoggerFactory.getLogger(OpenAiChatProvider.class);
+    private static final Logger logger = LoggerFactory.getLogger(OpenAiChatAdapter.class);
 
     private final ChatClient chatClient;
     private final ChatOptions chatOptions;
     private final List<Advisor> advisors;
     private final Message systemMessage;
 
-    public OpenAiChatProvider(
+    public OpenAiChatAdapter(
             ChatClient chatClient,
             ChatOptions chatOptions,
             List<Advisor> advisors,

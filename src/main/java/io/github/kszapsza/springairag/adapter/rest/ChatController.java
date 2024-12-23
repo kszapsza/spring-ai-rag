@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.kszapsza.springairag.domain.chat.ChatProvider;
+import io.github.kszapsza.springairag.domain.chat.ChatPort;
 import io.github.kszapsza.springairag.domain.chat.ChatRequest;
 import io.github.kszapsza.springairag.domain.chat.ChatResponse;
 import io.github.kszapsza.springairag.domain.chat.memory.ConversationId;
@@ -22,15 +22,15 @@ public class ChatController {
 
     private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
 
-    private final ChatProvider chatProvider;
+    private final ChatPort chatPort;
 
-    public ChatController(ChatProvider chatProvider) {
-        this.chatProvider = chatProvider;
+    public ChatController(ChatPort chatPort) {
+        this.chatPort = chatPort;
     }
 
     @PostMapping
     public ResponseEntity<ChatResponseDto> chat(@Valid @RequestBody ChatRequestDto request) {
-        var chatResponse = chatProvider.chat(request.toDomain());
+        var chatResponse = chatPort.chat(request.toDomain());
 
         return switch (chatResponse) {
             case ChatResponse.Success success -> {

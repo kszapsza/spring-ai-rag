@@ -1,5 +1,5 @@
 package io.github.kszapsza.springairag.domain.chat;
 
-public interface ChatProvider {
+public interface ChatPort {
     ChatResponse chat(ChatRequest request);
 }
