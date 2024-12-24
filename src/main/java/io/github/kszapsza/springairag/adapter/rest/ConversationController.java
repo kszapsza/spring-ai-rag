@@ -55,7 +55,7 @@ public class ConversationController {
                                 .toList()));
     }
 
-    record ConversationHistoryDto(String conversationId, List<ChatMessageDto> messages) {
+    public record ConversationHistoryDto(String conversationId, List<ChatMessageDto> messages) {
         record ChatMessageDto(String content, ChatMessageTypeDto type) {
             static ChatMessageDto fromDomain(ChatMessage message) {
                 return new ChatMessageDto(

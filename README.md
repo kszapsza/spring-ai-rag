@@ -1,6 +1,8 @@
 # spring-ai-rag
 
-A Retrieval-Augmented Generation (RAG) Spring Boot application built using Spring AI and integrated with the OpenAI API. It serves as a virtual real estate assistant capable of answering frequently asked questions (FAQs) based on company domain knowledge, searching real estate listings by filtering criteria such as location, price range, and number of bedrooms, and maintaining conversation history to provide context-aware follow-up responses.
+A Retrieval-Augmented Generation (RAG) Spring Boot application built using Spring AI and integrated with the OpenAI API.
+
+It serves as a **virtual real estate assistant** capable of answering frequently asked questions (FAQs) based on company domain knowledge, searching real estate listings by filtering criteria such as location, price range, and number of bedrooms, and maintaining conversation history to provide context-aware follow-up responses.
 
 ## Features
 
@@ -11,9 +13,17 @@ A Retrieval-Augmented Generation (RAG) Spring Boot application built using Sprin
 - **RESTful API Design**: Provides chat and conversation history retrieval endpoints, ready for frontend chatbot integration.
 - **Hexagonal Architecture**: Adopts ports and adapters for modularity, extensibility, and testability.
 
+## Flow
+
+1.	**User Query** – The user submits a question or request.
+2.	**Vector Search** – The query is vectorized and matched against stored embeddings in PostgreSQL (pgvector) to find relevant context.
+3.	**Context Enrichment** – Retrieved context is appended to the query and sent to OpenAI GPT for response generation.
+4.	**Function Calling** (Optional) – GPT can trigger database queries (e.g., property searches) via function calls to fetch real-time data, which is added to the final response.
+5.	**Response** – GPT combines the query, context, and function results to produce a context-aware answer.
+
 ## Local Run
 
-Set an enviroment variable with OpenAI API secret:
+Set an environment variable with OpenAI API secret:
 
 ```shell
 export SPRING_AI_OPENAI_API_KEY=<INSERT KEY HERE>
@@ -41,8 +51,8 @@ Generates a response based on user input.
 #### Request Body
 ```json
 {
-  "conversationId": "123",
-  "message": "What is Spring AI?"
+  "conversationId": "1447eadc-6c64-481b-aee3-b90ab5c1ef2f",
+  "message": "I'm looking for an apartment in Warsaw with two bedrooms under 1 million PLN."
 }
 ```
 
@@ -51,7 +61,7 @@ Generates a response based on user input.
 
 ```json
 {
-  "message": "Spring AI is a framework for integrating AI into Spring Boot applications."
+  "message": "Here are some apartments in Warsaw with two bedrooms under 1 million PLN:\n\n1. Apartment in Mokotów – 850,000 PLN, 2 bedrooms, 70 m².\n2. Apartment in Wola – 950,000 PLN, 2 bedrooms, 80 m².\n\nWould you like more details about any of these listings?"
 }
 ```
 
@@ -68,14 +78,14 @@ Retrieve recent chat messages.
 
 ```json
 {
-  "conversationId": "123",
+  "conversationId": "1447eadc-6c64-481b-aee3-b90ab5c1ef2f",
   "messages": [
     {
-      "content": "Hello!",
+      "content": "I'm looking for an apartment in Warsaw with two bedrooms under 1 million PLN.",
       "type": "USER"
     },
     {
-      "content": "Hi! How can I assist you?", 
+      "content": "Here are some apartments in Warsaw with two bedrooms under 1 million PLN:\n\n1. Apartment in Mokotów – 850,000 PLN, 2 bedrooms, 70 m².\n2. Apartment in Wola – 950,000 PLN, 2 bedrooms, 80 m².\n\nWould you like more details about any of these listings?",
       "type": "ASSISTANT"
     }
   ]

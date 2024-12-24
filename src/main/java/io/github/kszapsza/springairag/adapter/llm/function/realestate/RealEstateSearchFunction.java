@@ -33,7 +33,7 @@ public class RealEstateSearchFunction
                             request.maxPrice(),
                             request.minBedrooms()));
         } catch (Exception e) {
-            logger.error("An error occured when searching for real estate properties", e);
+            logger.error("An error occurred when searching for real estate properties", e);
             return new Response(List.of());
         }
     }
