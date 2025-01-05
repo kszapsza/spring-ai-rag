@@ -1,7 +1,7 @@
 package io.github.kszapsza.springairag.adapter.llm.openai;
 
-import java.util.List;
-
+import io.github.kszapsza.springairag.adapter.llm.ChatProperties;
+import io.github.kszapsza.springairag.adapter.llm.SystemPromptTemplateProvider;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
@@ -17,8 +17,7 @@ import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import io.github.kszapsza.springairag.adapter.llm.ChatProperties;
-import io.github.kszapsza.springairag.adapter.llm.SystemPromptTemplateProvider;
+import java.util.List;
 
 @Configuration
 class OpenAiChatConfiguration {

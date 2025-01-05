@@ -1,12 +1,11 @@
 package io.github.kszapsza.springairag.adapter.llm.classpath;
 
+import io.github.kszapsza.springairag.adapter.llm.EmbeddingDocumentsProvider;
+import io.github.kszapsza.springairag.adapter.llm.SystemPromptTemplateProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
-
-import io.github.kszapsza.springairag.adapter.llm.EmbeddingDocumentsProvider;
-import io.github.kszapsza.springairag.adapter.llm.SystemPromptTemplateProvider;
 
 @Configuration
 class ClasspathResourcesConfiguration {

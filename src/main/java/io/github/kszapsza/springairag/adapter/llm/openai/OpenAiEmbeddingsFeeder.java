@@ -1,12 +1,11 @@
 package io.github.kszapsza.springairag.adapter.llm.openai;
 
+import io.github.kszapsza.springairag.adapter.llm.EmbeddingDocumentsProvider;
+import io.github.kszapsza.springairag.domain.embedding.EmbeddingsFeeder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Component;
-
-import io.github.kszapsza.springairag.adapter.llm.EmbeddingDocumentsProvider;
-import io.github.kszapsza.springairag.domain.embedding.EmbeddingsFeeder;
 
 @Component
 public class OpenAiEmbeddingsFeeder implements EmbeddingsFeeder {

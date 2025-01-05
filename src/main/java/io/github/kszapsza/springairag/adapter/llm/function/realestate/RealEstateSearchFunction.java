@@ -1,14 +1,13 @@
 package io.github.kszapsza.springairag.adapter.llm.function.realestate;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.function.Function;
-
+import io.github.kszapsza.springairag.adapter.db.realestate.RealEstateEntity;
+import io.github.kszapsza.springairag.adapter.db.realestate.RealEstateRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.github.kszapsza.springairag.adapter.db.realestate.RealEstateEntity;
-import io.github.kszapsza.springairag.adapter.db.realestate.RealEstateRepository;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.function.Function;
 
 public class RealEstateSearchFunction
         implements Function<RealEstateSearchFunction.Request, RealEstateSearchFunction.Response> {

@@ -1,8 +1,8 @@
 package io.github.kszapsza.springairag.domain.chat.memory;
 
-import java.util.List;
-
 import io.github.kszapsza.springairag.domain.chat.ChatMessage;
+
+import java.util.List;
 
 public interface ChatMemoryPort {
 

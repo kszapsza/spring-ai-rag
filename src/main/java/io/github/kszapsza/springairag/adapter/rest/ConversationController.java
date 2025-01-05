@@ -1,24 +1,22 @@
 package io.github.kszapsza.springairag.adapter.rest;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import io.github.kszapsza.springairag.domain.chat.ChatMessage;
 import io.github.kszapsza.springairag.domain.chat.ChatMessageType;
 import io.github.kszapsza.springairag.domain.chat.memory.ChatMemoryPort;
 import io.github.kszapsza.springairag.domain.chat.memory.ConversationId;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/api/conversation")

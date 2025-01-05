@@ -1,7 +1,8 @@
 package io.github.kszapsza.springairag.adapter.llm.memory;
 
-import java.util.List;
-
+import io.github.kszapsza.springairag.domain.chat.ChatMessage;
+import io.github.kszapsza.springairag.domain.chat.memory.ChatMemoryPort;
+import io.github.kszapsza.springairag.domain.chat.memory.ConversationId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.memory.ChatMemory;
@@ -10,9 +11,7 @@ import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.stereotype.Component;
 
-import io.github.kszapsza.springairag.domain.chat.ChatMessage;
-import io.github.kszapsza.springairag.domain.chat.memory.ChatMemoryPort;
-import io.github.kszapsza.springairag.domain.chat.memory.ConversationId;
+import java.util.List;
 
 @Component
 public class ChatMemoryProvider implements ChatMemoryPort {

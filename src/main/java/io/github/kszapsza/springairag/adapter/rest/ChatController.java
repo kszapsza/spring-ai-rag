@@ -1,5 +1,11 @@
 package io.github.kszapsza.springairag.adapter.rest;
 
+import io.github.kszapsza.springairag.domain.chat.ChatPort;
+import io.github.kszapsza.springairag.domain.chat.ChatRequest;
+import io.github.kszapsza.springairag.domain.chat.ChatResponse;
+import io.github.kszapsza.springairag.domain.chat.memory.ConversationId;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -9,13 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import io.github.kszapsza.springairag.domain.chat.ChatPort;
-import io.github.kszapsza.springairag.domain.chat.ChatRequest;
-import io.github.kszapsza.springairag.domain.chat.ChatResponse;
-import io.github.kszapsza.springairag.domain.chat.memory.ConversationId;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 
 @RestController
 @RequestMapping("/api/chat")

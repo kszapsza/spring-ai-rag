@@ -1,11 +1,10 @@
 package io.github.kszapsza.springairag.adapter.llm.classpath;
 
+import io.github.kszapsza.springairag.adapter.llm.SystemPromptTemplateProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 import org.springframework.core.io.Resource;
-
-import io.github.kszapsza.springairag.adapter.llm.SystemPromptTemplateProvider;
 
 public class ClasspathSystemPromptTemplateProvider implements SystemPromptTemplateProvider {
 

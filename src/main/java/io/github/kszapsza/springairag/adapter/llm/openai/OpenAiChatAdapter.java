@@ -1,11 +1,8 @@
 package io.github.kszapsza.springairag.adapter.llm.openai;
 
-import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
-import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_RETRIEVE_SIZE_KEY;
-
-import java.util.List;
-import java.util.Optional;
-
+import io.github.kszapsza.springairag.domain.chat.ChatPort;
+import io.github.kszapsza.springairag.domain.chat.ChatRequest;
+import io.github.kszapsza.springairag.domain.chat.ChatResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
@@ -14,9 +11,11 @@ import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.stereotype.Component;
 
-import io.github.kszapsza.springairag.domain.chat.ChatPort;
-import io.github.kszapsza.springairag.domain.chat.ChatRequest;
-import io.github.kszapsza.springairag.domain.chat.ChatResponse;
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_CONVERSATION_ID_KEY;
+import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_RETRIEVE_SIZE_KEY;
 
 @Component
 public class OpenAiChatAdapter implements ChatPort {

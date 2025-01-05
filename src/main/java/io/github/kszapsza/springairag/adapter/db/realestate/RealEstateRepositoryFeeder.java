@@ -1,17 +1,15 @@
 package io.github.kszapsza.springairag.adapter.db.realestate;
 
-import java.io.IOException;
-import java.util.List;
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.kszapsza.springairag.domain.realestate.RealEstateFeeder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import io.github.kszapsza.springairag.domain.realestate.RealEstateFeeder;
+import java.io.IOException;
+import java.util.List;
 
 @Component
 public class RealEstateRepositoryFeeder implements RealEstateFeeder {
