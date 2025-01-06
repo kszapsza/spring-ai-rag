@@ -41,6 +41,16 @@ Run the app itself:
 ./gradlew bootRun
 ```
 
+Install and run the frontend app:
+
+```shell
+cd frontend && yarn && yarn dev
+```
+
+## Production Build
+
+TODO
+
 ## REST API
 
 ### Chat Endpoint
