@@ -37,33 +37,28 @@ Run a local PostgreSQL instance using Docker Compose, serving as both a vector s
 docker compose up -d
 ```
 
-Run the backend application (defaults to port 8080):
+Build and run the application (defaults to port 8080):
 
 ```shell
-./gradlew bootRun
+./gradlew run
 ```
 
-Install dependencies and start the Vite development server (defaults to port 5173):
+**Access the app at: `http://localhost:8080/`.**
+
+Frontend production build will be built automatically and served directly by Spring Boot
+from the frontend JAR on the classpath. Spring Boot resolves these files automatically using
+its default behavior for `classpath:/static/`. API calls in production use the same origin (`/`),
+eliminating proxy configurations.
+
+### Hot-Reload Development
+
+For frontend development with hot-reload, start the Vite development server (defaults to port 5173):
 
 ```shell
 cd frontend && yarn && yarn dev
 ```
 
-When using the Vite dev server, API calls are proxied to localhost:8080 by default.
-
-## Production Build
-
-Build the backend and frontend in a single step:
-
-```shell
-./gradlew build
-```
-
-Frontend assets are served directly by Spring Boot from the frontend JAR on the classpath.
-Spring Boot resolves these files automatically using its default behavior for classpath:/static/.
-API calls in production use the same origin (/), eliminating proxy configurations.
-
-Access the FE application at `http://localhost:8080/`.
+Vite automatically proxies API calls to `localhost:8080` via `vite.config.ts`—no additional setup required.
 
 ## REST API
 
