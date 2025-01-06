@@ -1,18 +1,21 @@
 [versions]
 integration-test = "2.2.2"
 junit-platform-launcher = "1.10.0"
+micrometer = "1.14.2"
 spring-ai = "1.0.0-M4"
-spring-boot = "3.4.0"
+spring-boot = "3.4.1"
 spring-dependency-management = "1.1.6"
 test-logger = "4.0.0"
 testcontainers = "1.20.4"
 
 [libraries]
 junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junit-platform-launcher" }
+micrometer-registry-prometheus = { group = "io.micrometer", name = "micrometer-registry-prometheus", version.ref = "micrometer" }
 postgresql = { group = "org.postgresql", name = "postgresql" }
 spring-ai-bom = { group = "org.springframework.ai", name = "spring-ai-bom", version.ref = "spring-ai" }
 spring-ai-openai-spring-boot-starter = { group = "org.springframework.ai", name = "spring-ai-openai-spring-boot-starter" }
 spring-ai-pgvector-store-spring-boot-starter = { group = "org.springframework.ai", name = "spring-ai-pgvector-store-spring-boot-starter" }
+spring-boot-starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator", version.ref = "spring-boot" }
 spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
 spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
 spring-boot-starter-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }

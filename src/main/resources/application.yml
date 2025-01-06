@@ -30,6 +30,19 @@ spring:
   profiles:
     default: local
 
+management:
+  endpoint:
+    prometheus:
+      access: READ_ONLY
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
 app:
   conversation:
     max-last-n: 1000
