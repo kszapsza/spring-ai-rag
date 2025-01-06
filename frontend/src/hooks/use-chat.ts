@@ -32,7 +32,7 @@ export const useChat = () => {
         throw new Error(errorData.message || "Failed to send the message.");
       }
 
-      const data = await response.json();
+      const data: ChatResponse = await response.json();
       return data.message;
     } catch (err) {
       setError((err as Error).message || "Unexpected error occurred.");

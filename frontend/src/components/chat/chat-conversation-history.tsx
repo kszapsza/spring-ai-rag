@@ -1,7 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { useEffect, useRef } from "react";
 import { ChatMessageBubble } from "@/components/chat/chat-message-bubble";
-import { ChatError } from "@/components/chat/chat-error";
 
 interface ChatMessagesProps {
   conversationHistoryLoading: boolean;

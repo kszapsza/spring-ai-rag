@@ -48,7 +48,7 @@ export const Chat = () => {
   };
 
   return (
-    <div className="flex flex-col w-full h-full">
+    <div className="container mx-auto flex flex-col w-full w-ma h-full">
       <div className="flex flex-col flex-1 rounded-xl border bg-card text-card-foreground overflow-hidden mx-4 md:mx-6 my-4">
         <ChatHeader onNewConversationClick={createNewConversation} />
 

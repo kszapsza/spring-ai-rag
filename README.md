@@ -4,6 +4,8 @@ A Retrieval-Augmented Generation (RAG) Spring Boot application built using Sprin
 
 It serves as a **virtual real estate assistant** capable of answering frequently asked questions (FAQs) based on company domain knowledge, searching real estate listings by filtering criteria such as location, price range, and number of bedrooms, and maintaining conversation history to provide context-aware follow-up responses.
 
+![Frontend Application Screenshot](app.png)
+
 ## Features
 
 - **Retrieval-Augmented Generation (RAG)**: Enriches AI-generated responses by dynamically retrieving context from structured data stored in PostgreSQL with pgvector for embeddings.
@@ -23,33 +25,45 @@ It serves as a **virtual real estate assistant** capable of answering frequently
 
 ## Local Run
 
-Set an environment variable with OpenAI API secret:
+Export your OpenAI API secret key as an environment variable:
 
 ```shell
 export SPRING_AI_OPENAI_API_KEY=<INSERT KEY HERE>
 ```
 
-Run a local PostgreSQL database, serving as a vector store and traditional relational database as well:
+Run a local PostgreSQL instance using Docker Compose, serving as both a vector store and a relational database:
 
 ```shell
 docker compose up -d
 ```
 
-Run the app itself:
+Run the backend application (defaults to port 8080):
 
 ```shell
 ./gradlew bootRun
 ```
 
-Install and run the frontend app:
+Install dependencies and start the Vite development server (defaults to port 5173):
 
 ```shell
 cd frontend && yarn && yarn dev
 ```
 
+When using the Vite dev server, API calls are proxied to localhost:8080 by default.
+
 ## Production Build
 
-TODO
+Build the backend and frontend in a single step:
+
+```shell
+./gradlew build
+```
+
+Frontend assets are served directly by Spring Boot from the frontend JAR on the classpath.
+Spring Boot resolves these files automatically using its default behavior for classpath:/static/.
+API calls in production use the same origin (/), eliminating proxy configurations.
+
+Access the FE application at `http://localhost:8080/`.
 
 ## REST API
 
