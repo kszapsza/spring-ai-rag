@@ -1,5 +1,6 @@
 plugins {
     java
+    alias(libs.plugins.spring.boot)
     alias(libs.plugins.integration.test)
     alias(libs.plugins.test.logger)
 }
@@ -7,19 +8,10 @@ plugins {
 group = "io.github.kszapsza"
 version = "0.0.1-SNAPSHOT"
 
-repositories {
-    mavenCentral()
-    maven { url = uri("https://repo.spring.io/milestone") }
-}
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-
 dependencies {
-    implementation(libs.micrometer.registry.prometheus)
+    implementation(platform(libs.spring.ai.bom))
+    implementation(platform(libs.spring.bom))
+    runtimeOnly(libs.micrometer.registry.prometheus)
     implementation(libs.postgresql)
     implementation(libs.spring.ai.openai.spring.boot.starter)
     implementation(libs.spring.ai.pgvector.store.spring.boot.starter)
@@ -35,6 +27,6 @@ dependencies {
     integrationImplementation(libs.bundles.testcontainers)
 }
 
-tasks.withType<Test> {
+tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
