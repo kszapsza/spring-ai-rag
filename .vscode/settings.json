@@ -1,0 +1,9 @@
+{
+  "editor.indentSize": 4,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.completion.importOrder": ["", "javax", "java", "#"],
+  "java.configuration.updateBuildConfiguration": "interactive"
+}

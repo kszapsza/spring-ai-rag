@@ -25,6 +25,8 @@ It serves as a **virtual real estate assistant** capable of answering frequently
 
 ## Local Run
 
+Use JDK 21.
+
 Export your OpenAI API secret key as an environment variable:
 
 ```shell
