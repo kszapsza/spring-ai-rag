@@ -20,20 +20,20 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/api/conversation")
-public class ConversationController {
+class ConversationController {
 
     private final ChatMemoryPort chatMemoryPort;
     private final int maxLastN;
 
-    public ConversationController(
+    ConversationController(
             ChatMemoryPort chatMemoryPort,
             @Value("${app.conversation.max-last-n}") int maxLastN) {
         this.chatMemoryPort = chatMemoryPort;
         this.maxLastN = maxLastN;
     }
 
-    @GetMapping(path = "{conversationId}", produces = { APPLICATION_JSON_VALUE }, consumes = { APPLICATION_JSON_VALUE })
-    public ResponseEntity<ConversationHistoryDto> getConversationHistory(
+    @GetMapping(path = "{conversationId}", produces = {APPLICATION_JSON_VALUE}, consumes = {APPLICATION_JSON_VALUE})
+    ResponseEntity<ConversationHistoryDto> getConversationHistory(
             @PathVariable(name = "conversationId") @Valid @NotBlank String conversationId,
             @RequestParam(name = "lastN", defaultValue = "10") int lastN) {
         if (lastN > maxLastN) {
@@ -47,21 +47,11 @@ public class ConversationController {
                 new ConversationHistoryDto(
                         conversationId,
                         messages.stream()
-                                .map((message) -> new ConversationHistoryDto.ChatMessageDto(
-                                        message.content(),
-                                        ConversationHistoryDto.ChatMessageTypeDto.valueOf(message.type().name())))
+                                .map(ConversationHistoryDto.ChatMessageDto::fromDomain)
                                 .toList()));
     }
 
-    public record ConversationHistoryDto(String conversationId, List<ChatMessageDto> messages) {
-        record ChatMessageDto(String content, ChatMessageTypeDto type) {
-            static ChatMessageDto fromDomain(ChatMessage message) {
-                return new ChatMessageDto(
-                        message.content(),
-                        ChatMessageTypeDto.fromDomain(message.type()));
-            }
-        }
-
+    record ConversationHistoryDto(String conversationId, List<ChatMessageDto> messages) {
         enum ChatMessageTypeDto {
             USER,
             ASSISTANT;
@@ -71,6 +61,14 @@ public class ConversationController {
                     case ChatMessageType.USER -> ChatMessageTypeDto.USER;
                     case ChatMessageType.ASSISTANT -> ChatMessageTypeDto.ASSISTANT;
                 };
+            }
+        }
+
+        record ChatMessageDto(String content, ChatMessageTypeDto type) {
+            static ChatMessageDto fromDomain(ChatMessage message) {
+                return new ChatMessageDto(
+                        message.content(),
+                        ChatMessageTypeDto.fromDomain(message.type()));
             }
         }
     }

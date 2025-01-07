@@ -9,13 +9,13 @@ import org.springframework.core.io.Resource;
 
 import java.util.List;
 
-public class ClasspathEmbeddingDocumentsProvider implements EmbeddingDocumentsProvider {
+class ClasspathEmbeddingDocumentsProvider implements EmbeddingDocumentsProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(ClasspathEmbeddingDocumentsProvider.class);
 
     private final List<Document> data;
 
-    public ClasspathEmbeddingDocumentsProvider(Resource documentsResource) {
+    ClasspathEmbeddingDocumentsProvider(Resource documentsResource) {
         if (documentsResource == null || !documentsResource.exists() || !documentsResource.isReadable()) {
             throw new IllegalArgumentException("RAG input data is missing or not readable");
         }

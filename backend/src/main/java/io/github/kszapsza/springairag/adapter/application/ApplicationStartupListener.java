@@ -1,7 +1,7 @@
 package io.github.kszapsza.springairag.adapter.application;
 
-import io.github.kszapsza.springairag.adapter.db.realestate.RealEstateRepositoryFeeder;
 import io.github.kszapsza.springairag.domain.embedding.EmbeddingsFeeder;
+import io.github.kszapsza.springairag.domain.realestate.RealEstateFeeder;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
@@ -9,21 +9,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Profile("local")
-public class ApplicationStartupListener {
+class ApplicationStartupListener {
 
     private final EmbeddingsFeeder embeddingsFeeder;
-    private final RealEstateRepositoryFeeder realEstateRepositoryFeeder;
+    private final RealEstateFeeder realEstateFeeder;
 
-    public ApplicationStartupListener(
+    ApplicationStartupListener(
             EmbeddingsFeeder embeddingsFeeder,
-            RealEstateRepositoryFeeder realEstateRepositoryFeeder) {
+            RealEstateFeeder realEstateFeeder) {
         this.embeddingsFeeder = embeddingsFeeder;
-        this.realEstateRepositoryFeeder = realEstateRepositoryFeeder;
+        this.realEstateFeeder = realEstateFeeder;
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    public void onApplicationReady() {
+    void onApplicationReady() {
         embeddingsFeeder.importEmbeddings();
-        realEstateRepositoryFeeder.feedDummyData();
+        realEstateFeeder.feedDummyData();
     }
 }

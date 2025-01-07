@@ -1,4 +1,4 @@
-package io.github.kszapsza.springairag.adapter.llm.function.realestate;
+package io.github.kszapsza.springairag.adapter.llm.function;
 
 import io.github.kszapsza.springairag.adapter.db.realestate.RealEstateEntity;
 import io.github.kszapsza.springairag.adapter.db.realestate.RealEstateRepository;
@@ -9,14 +9,14 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.function.Function;
 
-public class RealEstateSearchFunction
+class RealEstateSearchFunction
         implements Function<RealEstateSearchFunction.Request, RealEstateSearchFunction.Response> {
 
     private static final Logger logger = LoggerFactory.getLogger(RealEstateSearchFunction.class);
 
     private final RealEstateRepository realEstateRepository;
 
-    public RealEstateSearchFunction(RealEstateRepository realEstateRepository) {
+    RealEstateSearchFunction(RealEstateRepository realEstateRepository) {
         this.realEstateRepository = realEstateRepository;
     }
 
@@ -37,7 +37,7 @@ public class RealEstateSearchFunction
         }
     }
 
-    public record Request(
+    record Request(
             String countryCode,
             String location,
             BigDecimal minPrice,
@@ -45,6 +45,6 @@ public class RealEstateSearchFunction
             Integer minBedrooms) {
     }
 
-    public record Response(List<RealEstateEntity> results) {
+    record Response(List<RealEstateEntity> results) {
     }
 }
