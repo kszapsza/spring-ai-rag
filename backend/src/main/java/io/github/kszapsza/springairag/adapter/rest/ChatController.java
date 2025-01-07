@@ -18,18 +18,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/chat")
-public class ChatController {
+class ChatController {
 
     private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
 
     private final ChatPort chatPort;
 
-    public ChatController(ChatPort chatPort) {
+    ChatController(ChatPort chatPort) {
         this.chatPort = chatPort;
     }
 
     @PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE }, consumes = { MediaType.APPLICATION_JSON_VALUE })
-    public ResponseEntity<ChatResponseDto> chat(@Valid @RequestBody ChatRequestDto request) {
+    ResponseEntity<ChatResponseDto> chat(@Valid @RequestBody ChatRequestDto request) {
         var chatResponse = chatPort.chat(request.toDomain());
 
         return switch (chatResponse) {

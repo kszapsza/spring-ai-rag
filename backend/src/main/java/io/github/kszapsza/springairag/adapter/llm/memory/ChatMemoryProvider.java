@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ChatMemoryProvider implements ChatMemoryPort {
+class ChatMemoryProvider implements ChatMemoryPort {
 
     private static final Logger logger = LoggerFactory.getLogger(ChatMemoryProvider.class);
 
     private final ChatMemory chatMemory;
 
-    public ChatMemoryProvider(ChatMemory chatMemory) {
+    ChatMemoryProvider(ChatMemory chatMemory) {
         this.chatMemory = chatMemory;
     }
 

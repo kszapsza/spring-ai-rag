@@ -1,7 +1,6 @@
 package io.github.kszapsza.springairag.adapter.llm.function;
 
 import io.github.kszapsza.springairag.adapter.db.realestate.RealEstateRepository;
-import io.github.kszapsza.springairag.adapter.llm.function.realestate.RealEstateSearchFunction;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;

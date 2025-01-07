@@ -18,7 +18,7 @@ import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvis
 import static org.springframework.ai.chat.client.advisor.AbstractChatMemoryAdvisor.CHAT_MEMORY_RETRIEVE_SIZE_KEY;
 
 @Component
-public class OpenAiChatAdapter implements ChatPort {
+class OpenAiChatAdapter implements ChatPort {
 
     private static final Logger logger = LoggerFactory.getLogger(OpenAiChatAdapter.class);
 
@@ -27,7 +27,7 @@ public class OpenAiChatAdapter implements ChatPort {
     private final List<Advisor> advisors;
     private final Message systemMessage;
 
-    public OpenAiChatAdapter(
+    OpenAiChatAdapter(
             ChatClient chatClient,
             ChatOptions chatOptions,
             List<Advisor> advisors,

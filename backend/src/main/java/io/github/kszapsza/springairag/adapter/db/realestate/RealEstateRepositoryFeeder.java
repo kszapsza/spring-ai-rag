@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
-public class RealEstateRepositoryFeeder implements RealEstateFeeder {
+class RealEstateRepositoryFeeder implements RealEstateFeeder {
 
     private static final Logger logger = LoggerFactory.getLogger(RealEstateRepositoryFeeder.class);
 
@@ -20,7 +20,7 @@ public class RealEstateRepositoryFeeder implements RealEstateFeeder {
     private final ResourceLoader resourceLoader;
     private final ObjectMapper objectMapper;
 
-    public RealEstateRepositoryFeeder(
+    RealEstateRepositoryFeeder(
             RealEstateRepository realEstateRepository,
             ResourceLoader resourceLoader,
             ObjectMapper objectMapper) {

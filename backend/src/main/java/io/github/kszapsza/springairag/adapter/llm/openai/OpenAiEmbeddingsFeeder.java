@@ -8,14 +8,14 @@ import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OpenAiEmbeddingsFeeder implements EmbeddingsFeeder {
+class OpenAiEmbeddingsFeeder implements EmbeddingsFeeder {
 
     private static final Logger logger = LoggerFactory.getLogger(OpenAiEmbeddingsFeeder.class);
 
     private final EmbeddingDocumentsProvider dataProvider;
     private final VectorStore vectorStore;
 
-    public OpenAiEmbeddingsFeeder(
+    OpenAiEmbeddingsFeeder(
             VectorStore vectorStore,
             EmbeddingDocumentsProvider dataProvider) {
         this.vectorStore = vectorStore;

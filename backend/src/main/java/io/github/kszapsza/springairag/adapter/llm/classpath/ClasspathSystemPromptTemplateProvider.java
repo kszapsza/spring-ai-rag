@@ -6,13 +6,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.prompt.SystemPromptTemplate;
 import org.springframework.core.io.Resource;
 
-public class ClasspathSystemPromptTemplateProvider implements SystemPromptTemplateProvider {
+class ClasspathSystemPromptTemplateProvider implements SystemPromptTemplateProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(ClasspathSystemPromptTemplateProvider.class);
 
     private final SystemPromptTemplate systemPromptTemplate;
 
-    public ClasspathSystemPromptTemplateProvider(Resource systemPromptResource) {
+    ClasspathSystemPromptTemplateProvider(Resource systemPromptResource) {
         if (systemPromptResource == null || !systemPromptResource.exists() || !systemPromptResource.isReadable()) {
             throw new IllegalArgumentException("System prompt resource is missing or not readable");
         }
