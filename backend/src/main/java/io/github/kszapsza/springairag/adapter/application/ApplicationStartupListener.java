@@ -21,9 +21,9 @@ public class ApplicationStartupListener {
         this.realEstateRepositoryFeeder = realEstateRepositoryFeeder;
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void onApplicationReady() {
-        embeddingsFeeder.importEmbeddings();
-        realEstateRepositoryFeeder.feedDummyData();
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void onApplicationReady() {
+//        embeddingsFeeder.importEmbeddings();
+//        realEstateRepositoryFeeder.feedDummyData();
+//    }
 }

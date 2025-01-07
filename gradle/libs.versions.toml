@@ -11,8 +11,9 @@ testcontainers = "1.20.4"
 junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher", version.ref = "junit-platform-launcher" }
 micrometer-registry-prometheus = { group = "io.micrometer", name = "micrometer-registry-prometheus", version.ref = "micrometer" }
 postgresql = { group = "org.postgresql", name = "postgresql" }
-spring-ai-openai-spring-boot-starter = { group = "org.springframework.ai", name = "spring-ai-openai-spring-boot-starter", version.ref = "spring-ai" }
-spring-ai-pgvector-store-spring-boot-starter = { group = "org.springframework.ai", name = "spring-ai-pgvector-store-spring-boot-starter", version.ref = "spring-ai" }
+spring-ai-bom = { group = "org.springframework.ai", name = "spring-ai-bom", version.ref = "spring-ai" }
+spring-ai-openai-spring-boot-starter = { group = "org.springframework.ai", name = "spring-ai-openai-spring-boot-starter" }
+spring-ai-pgvector-store-spring-boot-starter = { group = "org.springframework.ai", name = "spring-ai-pgvector-store-spring-boot-starter" }
 spring-boot-starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator", version.ref = "spring-boot" }
 spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa", version.ref = "spring-boot" }
 spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test", version.ref = "spring-boot" }
@@ -30,5 +31,7 @@ testcontainers = [
 ]
 
 [plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-boot-dependency-management = { id = "io.spring.dependency-management", version = "1.1.7" }
 integration-test = { id = "com.coditory.integration-test", version.ref = "integration-test" }
 test-logger = { id = "com.adarshr.test-logger", version.ref = "test-logger" }
